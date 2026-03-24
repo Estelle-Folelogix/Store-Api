@@ -1,6 +1,6 @@
-package com.estelle.store.repository;
+package com.estelle.store.product.domain.repository;
 
-import com.estelle.store.model.Product;
+import com.estelle.store.product.domain.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

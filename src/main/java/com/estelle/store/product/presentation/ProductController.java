@@ -1,7 +1,7 @@
-package com.estelle.store.controller;
+package com.estelle.store.product.presentation;
 
-import com.estelle.store.model.Product;
-import com.estelle.store.service.ProductService;
+import com.estelle.store.product.domain.model.Product;
+import com.estelle.store.product.domain.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

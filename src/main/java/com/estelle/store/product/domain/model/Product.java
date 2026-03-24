@@ -1,4 +1,4 @@
-package com.estelle.store.model;
+package com.estelle.store.product.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
