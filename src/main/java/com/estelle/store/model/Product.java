@@ -8,13 +8,10 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-
-@Component
 @Entity
 @Data
 @AllArgsConstructor
@@ -32,6 +29,6 @@ public class Product {
     private String category;
     private boolean available;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date releaseDate;
 }
