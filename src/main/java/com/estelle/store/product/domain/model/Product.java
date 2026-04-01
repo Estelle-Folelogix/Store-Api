@@ -26,7 +26,10 @@ public class Product {
     private int quantity;
     private String brand;
     private String description;
-    private String category;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
     private boolean available;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
