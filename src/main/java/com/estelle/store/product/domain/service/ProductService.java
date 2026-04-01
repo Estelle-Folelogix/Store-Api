@@ -1,6 +1,9 @@
 package com.estelle.store.product.domain.service;
 
+import com.estelle.store.exception.ResourceNotFoundException;
+import com.estelle.store.product.domain.model.Category;
 import com.estelle.store.product.domain.model.Product;
+import com.estelle.store.product.domain.repository.CategoryRepo;
 import com.estelle.store.product.domain.repository.ProductRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +18,10 @@ import java.util.List;
 public class ProductService {
 
     @Autowired
-    ProductRepo repo;
+    private ProductRepo repo;
+
+    @Autowired
+    private CategoryRepo categoryRepo;
 
     public List<Product> getProducts(){
         return repo.findAll();
@@ -25,7 +31,12 @@ public class ProductService {
         return repo.findById(prodId).orElse(new Product());
     }
 
-    public Product createProduct(Product prod, MultipartFile imageFile) throws IOException {
+    public Product createProduct(Product prod, MultipartFile imageFile) throws IOException, ResourceNotFoundException {
+        //found the category, to link with the product, in database
+        Integer categoryId = prod.getCategory().getCategoryId();
+        Category category = categoryRepo.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
+        prod.setCategory(category);
         prod.setImageName(imageFile.getOriginalFilename());
         prod.setImageType(imageFile.getContentType());
         prod.setImageData(imageFile.getBytes());
