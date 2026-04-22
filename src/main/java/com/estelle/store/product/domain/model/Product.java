@@ -39,6 +39,7 @@ public class Product {
 
     private String imageName;
     private String imageType;
+
     @Lob
     @Column(name = "image_data", length = 1000000) // Défine max length
     @JdbcTypeCode(java.sql.Types.VARBINARY)

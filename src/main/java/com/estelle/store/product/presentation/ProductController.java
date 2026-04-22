@@ -36,7 +36,8 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/product")
+    @PostMapping("/product") //this method was working well in postman but not in swagger, i,ve try the other one below for both
+                                                               // because swagger was reading my prod as a string instead of a json
     public ResponseEntity<?> createProduct(
             @RequestPart("prod") String prodJson,
             @RequestPart("imageFile") MultipartFile imageFile) {
@@ -52,6 +53,26 @@ public class ProductController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /*@PostMapping(value = "/product", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> createProduct(
+            @RequestPart("prod") Product prod, // Spring manage the JSON itself here
+            @RequestPart("imageFile") MultipartFile imageFile) {
+
+        try {
+            // no manual ObjectMapper needed, prod is already an Product objet
+            Product product = service.createProduct(prod, imageFile);
+            return new ResponseEntity<>(product, HttpStatus.CREATED);
+        } catch (IOException e) {
+            // Error related at the image treatment
+            return new ResponseEntity<>("Error while treating image : " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            // others errors (validation, database etc.)
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }*/
+
 
     //Method to fetch the image which comes with product
     @GetMapping("/product/{prodId}/image")
