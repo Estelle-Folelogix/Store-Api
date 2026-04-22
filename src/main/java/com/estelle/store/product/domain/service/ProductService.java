@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,6 +45,7 @@ public class ProductService {
         repo.deleteById(prodId);
     }
 
+    @Transactional(readOnly = true)
     public List<Product> searchProducts(String keyword) {
        return repo.searchProducts(keyword);
     }

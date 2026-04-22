@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -34,6 +35,9 @@ public class Product {
 
     private String imageName;
     private String imageType;
+
     @Lob
+    @Column(name = "image_data", length = 1000000) // Défine max length
+    @JdbcTypeCode(java.sql.Types.VARBINARY)
     private byte[] imageData;
 }
